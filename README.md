@@ -1,2 +1,2 @@
 # CompetitiveProgramming
-Solution related to question durting contest of Codeforces and Codechef.
+Solution related to questions durting contest of Codeforces and Codechef.
