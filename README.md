@@ -1,2 +1,2 @@
 # CompetitiveProgramming
-Done questions durting contest of Codeforces and Codechef.
+Done questions during contest of Codeforces and Codechef.
