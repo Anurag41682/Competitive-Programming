@@ -92,29 +92,11 @@ let g:netrw_list_hide= '.*\.swp$,\~$,\.orig$'
 
 
 
-
-"---------------TAB for Navigation---------------"
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<Tab>" :
-            \ coc#refresh()
-
-
-
-
-
-
 "-----------------Auto-complete and template ------------"
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
-
 
 
 
@@ -140,3 +122,25 @@ au BufWrite *.js,*.html,*.css,*.jsx :Autoformat
 "--- for removing background color in vim and using the terminal background ---"
 
 hi Normal ctermbg=none
+
+
+
+
+"---------------TAB for Navigation---------------"
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+
+
+
+"END
+
+
+
