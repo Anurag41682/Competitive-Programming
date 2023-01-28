@@ -15,7 +15,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim' "Like Intellisense 
 Plug 'chiel92/vim-autoformat' "formater
 Plug 'sheerun/vim-polyglot' "highlighter and indenter for all language
-Plug 'maxmellon/vim-jsx-pretty' "highlighter adn indenter for react syntax
 
 call plug#end()
 syntax enable
