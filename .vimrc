@@ -133,7 +133,7 @@ inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-"select from first errorfix-{"suggest.noselect" : true}
+"select from first errorfix (put this line in CocConfig)-{"suggest.noselect" : true}
 
 
 
