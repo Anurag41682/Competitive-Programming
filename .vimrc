@@ -12,30 +12,27 @@ set completeopt-=preview
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim' "Like Intellisense 
-Plug 'chiel92/vim-autoformat' "formater
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "like intellisense
+Plug 'chiel92/vim-autoformat' "formatter
 Plug 'sheerun/vim-polyglot' "highlighter and indenter for all language
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty' "highlighter for jsx files
+"Plug 'ap/vim-css-color' "color in sourcecode
 
 call plug#end()
 syntax enable
 
-
-
-
-
-
 "colorscheme solarized
-"colorscheme monokai
+colorscheme monokai
 "colorscheme gruvbox
 
-set background=dark
-set termguicolors
-colorscheme monokai_pro
-let g:lightline = {
-      \ 'colorscheme': 'monokai_pro',
-      \ }
+"set background=dark
+"set termguicolors
+"colorscheme monokai_pro
+"let g:lightline = {
+"      \ 'colorscheme': 'monokai_pro',
+"      \ }
 
+"
 
 "let g:molokai_original = 1
 "colorscheme molokai
@@ -53,11 +50,13 @@ let g:lightline = {
 nnoremap <F5> :!g++-12 -std=c++20 -O2 -Wall -Wextra -Wshadow -fsanitize=undefined -fno-sanitize-recover -DLOCAL -g % -o %:r && ./%:r<CR>
 nnoremap<C-F5> :!clang++-14 -std=c++20 -Wall -Wextra -Wshadow -fsanitize=undefined -fno-sanitize-recover -DLOCAL  -g % -o %:r && ./%:r<CR>
 inoremap<C-J> <Esc>
+inoremap {<CR> {<CR>}<C-o>O
 vnoremap<C-J> <Esc>
 vnoremap<C-C> :w !xclip -i -sel c <CR>
 noremap<C-P> :r !xclip -o -sel -c <CR>
 noremap<C-A> ggVG
-inoremap {<CR> {<CR>}<C-o>O
+noremap<C-T> :tabnew <CR>
+noremap<C-E> :Explore <CR>
 
 
 
@@ -107,8 +106,8 @@ autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").
 "------------C++-----------
 
 
-let g:formatterpath = ['/usr/share/clang/clang-format-10/clang-format.py']
-au BufWrite *.cpp :Autoformat
+let g:formatterpath = ['/usr/share/clang/clang-format-14/clang-format.py']
+au BufWrite *.cpp,*.c :Autoformat
 
 
 "---------Javascript------
@@ -134,10 +133,77 @@ inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-"select from first errorfix (put this line in CocConfig)-{"suggest.noselect" : true}
+"select from first errorfix-{"suggest.noselect" : true}
 
 
 
+"fix tab name size
+
+if exists( '+showtabline' )
+    function! MyTabLine()
+        let s = ''
+        let wn = ''
+        let t = tabpagenr()
+        let i = 1
+        let cnt = 0
+        let totalLen = 0
+        while i <= tabpagenr( '$' )
+          let winnr = tabpagewinnr( i )
+          let buflist = tabpagebuflist( i )
+          let bufnr = buflist[winnr - 1]
+          let file = bufname( bufnr )
+          let buftype = getbufvar( bufnr , 'buftype' )
+          if buftype == 'nofile'
+              if file =~ '\/.'
+                  let file = substitute( file , '.*\/\ze.' , '' , '' )
+              endif
+          else
+              let file = fnamemodify( file , ':p:t' )
+          endif
+        "<Number><Space><file><Space>
+          let totalLen = totalLen + 3 + len(file)
+          let i = i + 1
+        endwhile
+        let i = 1 
+        while i <= tabpagenr( '$' )
+            let buflist = tabpagebuflist( i )
+            let winnr = tabpagewinnr( i )
+            let s .= '%' . i . 'T'
+            let s .= ( i == t ? '%1*' : '%2*' )
+            let wn = tabpagewinnr( i ,'$' )
+            let s .= '%#TabNum#'
+            let s .= i
+            "let s .= '%*'
+            let s .= ( i == t ? '%#TabLineSel#' : '%#TabLine#' )
+            let bufnr = buflist[winnr - 1]
+            let file = bufname( bufnr )
+            let buftype = getbufvar( bufnr , 'buftype' )
+            if buftype == 'nofile'
+                if file =~ '\/.'
+                    let file = substitute( file , '.*\/\ze.' , '' , '' )
+                endif
+            else
+                let file = fnamemodify( file , ':p:t' )
+            endif
+
+            "echo totalLen . "/" . &columns . ", file=" . file
+            if totalLen > &columns && len(file) > 16
+                let file = strpart( file, 0, 6 )  . "~" . strpart( file, len(file)-10 )
+            endif
+            if file == ''
+                let file = '[No Name]'
+            endif
+            let s .= ' ' . file . ' '
+            let i = i + 1
+        endwhile
+        let s .= '%T%#TabLineFill#%='
+        let s .= ( tabpagenr('$') > 1 ? '%999XX' : 'X' )
+        return s
+    endfunction
+    set stal=2
+    set tabline=%!MyTabLine()
+    highlight link TabNum Special
+endif
 
 
 "END
