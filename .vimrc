@@ -1,11 +1,10 @@
-set nocompatible
+"set nocompatible
 filetype on
 set number
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set title
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
+set noexpandtab tabstop=2 shiftwidth=2
+set softtabstop=2
 set mouse=a
 set completeopt-=preview
 
@@ -16,14 +15,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} "like intellisense
 Plug 'chiel92/vim-autoformat' "formatter
 Plug 'sheerun/vim-polyglot' "highlighter and indenter for all language
 Plug 'maxmellon/vim-jsx-pretty' "highlighter for jsx files
-"Plug 'ap/vim-css-color' "color in sourcecode
+Plug 'joshdick/onedark.vim'
+
 
 call plug#end()
 syntax enable
 
 "colorscheme solarized
-colorscheme monokai
+"colorscheme monokai
 "colorscheme gruvbox
+colorscheme onedark
+
 
 "set background=dark
 "set termguicolors
@@ -71,6 +73,7 @@ let g:vim_jsx_pretty_colorful_config = 1 " default 0
 
 "--- used in vim-c++ to remove curly brace error----
 let c_no_curly_error=1
+
 
 
 
@@ -134,6 +137,8 @@ inoremap <silent><expr> <Tab>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 "select from first errorfix-{"suggest.noselect" : true}
+
+
 
 
 
