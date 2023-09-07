@@ -3,10 +3,10 @@
 		"scope": "cpp",
 		"prefix": "cp",
 		"body":  [
-      "#include <bits/stdc++.h>",
+      		"#include <bits/stdc++.h>",
 			"#define endl '\\n'",
 			"#define int long long",
-      "using namespace std;",
+      			"using namespace std;",
 			"int solve() {}",
 			"int32_t main() {",
 			"\tios::sync_with_stdio(false);",
@@ -15,7 +15,7 @@
 			"\tcin >> T;",
 			"\twhile (T--) solve();",
 			"}"
-    ],
+    		],
 		"description": "template for competitive programming."
 	}
 }
