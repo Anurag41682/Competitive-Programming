@@ -1,0 +1,21 @@
+{
+	"template for competitive programming": {
+		"scope": "cpp",
+		"prefix": "cp",
+		"body":  [
+      "#include <bits/stdc++.h>",
+			"#define endl '\\n'",
+			"#define int long long",
+      "using namespace std;",
+			"int solve() {}",
+			"int32_t main() {",
+			"\tios::sync_with_stdio(false);",
+			"\tcin.tie(nullptr);",
+			"\tint T = 1;",
+			"\tcin >> T;",
+			"\twhile (T--) solve();",
+			"}"
+    ],
+		"description": "template for competitive programming."
+	}
+}
