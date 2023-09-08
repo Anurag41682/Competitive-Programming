@@ -21,11 +21,13 @@ Plug 'joshdick/onedark.vim'
 call plug#end()
 syntax enable
 
+"-----------------------------------------------------------------------
+
+
 "colorscheme solarized
 "colorscheme monokai
 "colorscheme gruvbox
 "colorscheme onedark
-
 
 "set background=dark
 "set termguicolors
@@ -34,11 +36,8 @@ syntax enable
 "      \ 'colorscheme': 'monokai_pro',
 "      \ }
 
-"
-
 "let g:molokai_original = 1
 "colorscheme molokai
-
 
 "colorscheme tender
 "let g:lightline = { 'colorscheme': 'tender' }
@@ -48,6 +47,8 @@ syntax enable
 
 
 
+
+"------------------------------------------------------------------------
 
 nnoremap <F5> :!g++-12 -std=c++20 -O2 -Wall -Wextra -Wshadow -fsanitize=undefined -fno-sanitize-recover -DLOCAL -g % -o %:r && ./%:r<CR>
 nnoremap<C-F5> :!clang++-14 -std=c++20 -Wall -Wextra -Wshadow -fsanitize=undefined -fno-sanitize-recover -DLOCAL  -g % -o %:r && ./%:r<CR>
@@ -63,6 +64,8 @@ noremap<C-E> :Explore <CR>
 
 
 
+
+
 "----used in vim-jsx-pretty ----
 let g:vim_jsx_pretty_highlight_close_tag = 1
 let g:vim_jsx_pretty_colorful_config = 1 " default 0
@@ -71,13 +74,16 @@ let g:vim_jsx_pretty_colorful_config = 1 " default 0
 
 
 
-"--- used in vim-c++ to remove curly brace error----
+"------------- used in vim-c++ to remove curly brace error-------------------
+
+
 let c_no_curly_error=1
 
 
+"-----------------------------------------------------------------------------
 
 
-"--- file explorer ---
+" file explorer
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
@@ -94,7 +100,6 @@ let g:netrw_list_hide= '.*\.swp$,\~$,\.orig$'
 
 
 
-
 "-----------------Auto-complete and template ------------
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -102,7 +107,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
 
 
-
+"-------------------------------------------------------------------------------
 
 
 "----------------Auto-Format on Save -----------------
@@ -120,22 +125,31 @@ let g:formatterpath = ['/usr/local/lib/node_modules/js-beautify/js/index.js']
 au BufWrite *.js,*.html,*.css,*.jsx :Autoformat
 
 
+"--------------------------------- color change -----------------------------------
+"gui ==  gvim
+"cterm == terminal vim (only this in my case matter)
+"terminal support 1-256 colors you can google all the colors/print on cmd itself 
+"----------------------------------------------------------------------------------
+"AlienBlood looking good on this settings
 
 
-"--- for removing background color in vim and using the terminal background ---
-
-"hi Normal ctermbg=none
-
-"----- Suggestion box color change-----
-
-"normal box
-highlight CocFloating ctermfg=yellow guifg=yellow ctermbg=darkgrey guibg=#CCCCCC
-
-
+"for removing background color in vim and using the terminal background
+hi Normal ctermbg=none
+"suggestion box
+highlight CocFloating ctermfg=white  ctermbg=black 
+"side line warning and error when comes
+highlight SignColumn ctermbg=none guibg=white ctermfg=white guifg=white
+"change the color of background color of selected text in visual mode
+highlight Visual ctermbg=236 guibg=lightgray
 
 
 
-" use <tab> to trigger completion and navigate to the next complete item
+
+"------------------------------------------------------------------------------
+
+
+
+"use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -145,14 +159,21 @@ inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+
+
+
+
+"--------------------------------------------------------------------------------
+
+
 "select from first errorfix-{"suggest.noselect" : true}
 
 
 
+"--------------------------------------------------------------------------------
 
 
 "fix tab name size
-
 if exists( '+showtabline' )
     function! MyTabLine()
         let s = ''
