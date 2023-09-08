@@ -24,7 +24,7 @@ syntax enable
 "colorscheme solarized
 "colorscheme monokai
 "colorscheme gruvbox
-colorscheme onedark
+"colorscheme onedark
 
 
 "set background=dark
@@ -124,7 +124,16 @@ au BufWrite *.js,*.html,*.css,*.jsx :Autoformat
 
 "--- for removing background color in vim and using the terminal background ---
 
-hi Normal ctermbg=none
+"hi Normal ctermbg=none
+
+"----- Suggestion box color change-----
+
+"normal box
+highlight CocFloating ctermfg=yellow guifg=yellow ctermbg=darkgrey guibg=#CCCCCC
+
+
+
+
 
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
