@@ -109,7 +109,7 @@ void _print(const std::priority_queue<T> &pq) {
         pqt.pop();
         n--;
     }
-[11:48 pm, 09/09/2023] Anurag: cerr << "}]";
+    cerr << "}]";
 }
 
 #ifdef LOCAL
