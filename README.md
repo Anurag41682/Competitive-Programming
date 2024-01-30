@@ -1,2 +1,3 @@
 # Competitive-Programming
-Competitive Questions and their Solutions
+
+CP related Config files.
