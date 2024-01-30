@@ -1,3 +1,3 @@
 # Competitive-Programming
 
-CP related Config files.
+CP related config files.
